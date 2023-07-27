@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('todos', function (Blueprint $table) {
             $table->id();
-            $table->string('name',50);
-            $table->string('title',50);
+            $table->string('title',30);
             $table->text('description');
-            $table->decimal('duration',50);
+            $table->enum('status',['pending','in progress','completed']);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->restrictOnDelete()->cascadeOnUpdate();
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('created_at')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('todos');
     }
 };

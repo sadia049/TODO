@@ -5,14 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Task extends Model
+class Todo extends Model
 {
-    protected $fillable=[
-        'name',
-        'title',
-        'description',
-        'duration'
-
-    ];
     use HasFactory;
+    protected $fillable=['title','description','status','user_id'];
+    protected $attributes=['status'=>'pending'];
 }

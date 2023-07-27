@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+//API Routes
+
+Route::post('/user-registration',[UserController::class,'registration']);
+Route::post('/user-login',[UserController::class,'Login']);
+Route::post('/send-OTP',[UserController::class,'sendOTP']);
+Route::post('/verify-OTP',[UserController::class,'verifyOtp']);
+Route::post('/reset-password',[UserController::class,'resetPassword'])->middleware([TokenVerificationMiddleware::class]);
